@@ -15,7 +15,7 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	}
 
 	SECTION("no options and input") {
-		char * argv[] = { "line-sort" , "inpput" };
+		char * argv[] = { "line-sort" , "input" };
 		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, (char *) "input"));
 	}
 
