@@ -35,7 +35,7 @@ int main(int argc, char * argv[])
 	}
 
 	std::istream & input = file ? fs : std::cin;
-
+	
 	if (!sort::process(order, filter, compare, input, std::cout))
 	{
 		// print "sort error"

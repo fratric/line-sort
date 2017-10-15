@@ -6,7 +6,7 @@
 
 #include <sstream>
 
-TEST_CASE("Options")
+TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 {
 	SECTION("no options")
 	{
@@ -14,21 +14,69 @@ TEST_CASE("Options")
 		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, (char *) nullptr));
 	}
 
+	SECTION("no options and input") {
+		char * argv[] = { "line-sort" , "inpput" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, (char *) "input"));
+	}
+
 	SECTION("reversed")
 	{
+		char * argv[] = { "line-sort" , "-r"};
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) nullptr));
 	}
+
+	SECTION("reversed and input") {
+		char * argv[] = { "line-sort" , "-r" , "input" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) "input"));
+	}
+
 
 	SECTION("unique")
 	{
+		char * argv[] = { "line-sort" , "-u" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, (char *) nullptr));
+	}
+
+	SECTION("unique and input") {
+		char * argv[] = { "line-sort" , "-u" , "input" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, (char *) "input"));
 	}
 
 	SECTION("ignore case")
 	{
+		char * argv[] = { "line-sort" , "-i"};
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, (char *) nullptr));
 	}
 
-	SECTION("multiple")
-	{
+	SECTION("ignore case and input") {
+		char * argv[] = { "line-sort" , "-i" , "input" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, (char *) "input"));
 	}
+
+	SECTION("multiple 3")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-i" , "-u" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, (char *) nullptr));
+	}
+
+	SECTION("multiple 3 and input")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-i" , "-u" , "input" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, (char *) "input"));
+	}
+
+	SECTION("multiple 2")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-u" };
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, (char *) nullptr));
+	}
+
+	SECTION("multiple 2 and input")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-u" , "input"};
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, (char *) "input"));
+	}
+
 }
 
 namespace
