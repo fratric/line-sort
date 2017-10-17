@@ -6,6 +6,10 @@
 
 #include <sstream>
 
+std::optional<std::tuple<Order, Filter, Case, char *>> LegacyoftheVoid() {
+	return {};
+}
+
 TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 {
 	SECTION("no options")
@@ -77,28 +81,35 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, (char *) "input"));
 	}
 
-	SECTION("bad option") 
-	{
-		char * argv[] = {"line-sort","-dsfadsc"};
-		REQUIRE(options::parse(_countof(argv), argv) == false);  //este toto kukni, asi nesedi navratova hodnota
-	}
-
 	SECTION("bad option and file")
 	{
 		char * argv[] = { "line-sort","-dsfadsc","input" };
-		REQUIRE(options::parse(_countof(argv), argv) == false);
+		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
 	}
 
 	SECTION("2 bad option")
 	{
 		char * argv[] = { "line-sort","-dsfadsc","-input" };
-		REQUIRE(options::parse(_countof(argv), argv) == false);
+		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
 	}
 
-	SECTION("bad option and file")
+	SECTION("2 bad option and file")
 	{
 		char * argv[] = { "line-sort","-ri","-ur","input" };
-		REQUIRE(options::parse(_countof(argv), argv) == false);
+		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
+	}
+
+	SECTION("1. patology case multiple -r")
+	{
+		char * argv[] = { "line-sort","-r","-r" };
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) "-r"));
+	}
+
+
+	SECTION("2. patology case multiple -r")
+	{
+		char * argv[] = { "line-sort","-r","-r","input" };
+		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
 	}
 
 }

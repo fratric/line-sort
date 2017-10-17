@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	char * file;
 
 	std::tie(order, filter, compare, file) = options.value();
-
+	
 	std::fstream fs;
 	if (file)
 	{
