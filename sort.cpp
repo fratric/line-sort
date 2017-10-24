@@ -6,7 +6,9 @@
 #include <algorithm>
 #include <cctype>
 #include <sstream>
-
+#include <iostream>
+#include <fstream>
+#include <ostream>
 
 namespace
 {
@@ -22,7 +24,9 @@ bool sort::process(Order order, Filter filter, Case compare, std::istream & inpu
 {
 	std::vector<std::string> lines { std::istream_iterator<Line>(input), std::istream_iterator<Line>() };
 
-	// implementation of sorting
+	if (!lines.empty()) {
+		
+	}
 
 	return true;
 }

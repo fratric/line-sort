@@ -7,6 +7,11 @@
 
 std::optional<std::tuple<Order, Filter, Case, char *>> options::parse(int argc, char * argv[])
 {
+	std::string par = argv[0];
+	if (par!="line-sort") {
+		return {};
+	}
+
 	Order order { Order::ascending };
 	Filter filter { Filter::all };
 	Case compare { Case::sensitive };

@@ -6,10 +6,6 @@
 
 #include <sstream>
 
-std::optional<std::tuple<Order, Filter, Case, char *>> LegacyoftheVoid() {
-	return {};
-}
-
 TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 {
 	SECTION("no options")
@@ -84,19 +80,19 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	SECTION("bad option and file")
 	{
 		char * argv[] = { "line-sort","-dsfadsc","input" };
-		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
+		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
 	}
 
 	SECTION("2 bad option")
 	{
 		char * argv[] = { "line-sort","-dsfadsc","-input" };
-		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
+		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
 	}
 
 	SECTION("2 bad option and file")
 	{
 		char * argv[] = { "line-sort","-ri","-ur","input" };
-		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
+		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
 	}
 
 	SECTION("1. patology case multiple -r")
@@ -109,9 +105,14 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	SECTION("2. patology case multiple -r")
 	{
 		char * argv[] = { "line-sort","-r","-r","input" };
-		REQUIRE(options::parse(_countof(argv), argv) == LegacyoftheVoid());
+		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
 	}
 
+	SECTION("first argument")
+	{
+		char * argv[] = { "line-sort","-r","-r","input" };
+		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
+	}
 }
 
 namespace
