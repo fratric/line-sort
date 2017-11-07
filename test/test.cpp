@@ -247,7 +247,7 @@ TEST_CASE("Sorting")
 
 		output.str("");
 		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::mixed(), output) == true);
-		REQUIRE(output.str() == "\n \nAa\naZ\nB\nc\nD\nE\nf\nFx\nG\n");
+		REQUIRE(output.str() == "\n \nAa\nAz\nB\nc\nD\nE\nf\nFx\nG\n");
 	}
 
 	SECTION("descending")
@@ -295,7 +295,7 @@ TEST_CASE("Sorting")
 
 		output.str("");
 		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::mixed(), output) == true);
-		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\naZ\nAz\nAa\n \n\n");
+		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\nAz\naZ\nAa\n \n\n");
 	}
 
 	SECTION("descending - unique")
@@ -343,6 +343,6 @@ TEST_CASE("Sorting")
 
 		output.str("");
 		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::mixed(), output) == true);
-		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\naZ\nAa\n \n\n");
+		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\nAz\nAa\n \n\n");
 	}
 }

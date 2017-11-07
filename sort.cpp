@@ -37,14 +37,36 @@ bool compareNoCase(std::string first, std::string second)
 	else return false;
 }
 
+void setSame(std::vector<std::string> & vekt) {
+	for (int i = 0; i < vekt.size(); i++) {
+		for (int j = i; j < vekt.size(); j++) {
+			if (i != j) {
+				std::string vi;
+				std::string vj;
+				vi = vekt[i];
+				vj = vekt[j];
+				std::transform(vi.begin(), vi.end(), vi.begin(), ::tolower);
+				std::transform(vj.begin(), vj.end(), vj.begin(), ::tolower);
+				if (vi==vj) {
+					vekt[i] = vekt[j];
+				}
+			}
+		}
+	}
+}
+
 bool sort::process(Order order, Filter filter, Case compare, std::istream & input, std::ostream & output)
 {
 	std::vector<std::string> lines { std::istream_iterator<Line>(input), std::istream_iterator<Line>() };
 	
 
 	if (!lines.empty()) {
+		if (Case::ignore == compare && Filter::unique == filter) {
+			setSame(lines);
+		}
+
 		if (Filter::unique == filter) {
-			std::set<std::string> s(lines.begin(), lines.end());	//toto mi nefunguje, lebo povazuje pri nocase Az != aZ
+			std::set<std::string> s(lines.begin(), lines.end());
 			lines.assign(s.begin(), s.end());
 		}
 
