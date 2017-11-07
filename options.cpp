@@ -5,7 +5,7 @@
 #include <ostream>
 #include <string>
 
-std::optional<std::tuple<Order, Filter, Case, char *>> options::parse(int argc, char * argv[])
+std::optional<std::tuple<Order, Filter, Case, FilterSpace, char *>> options::parse(int argc, char * argv[])
 {
 	std::string par = argv[0];
 	if (par!="line-sort") {
@@ -15,9 +15,10 @@ std::optional<std::tuple<Order, Filter, Case, char *>> options::parse(int argc, 
 	Order order { Order::ascending };
 	Filter filter { Filter::all };
 	Case compare { Case::sensitive };
+	FilterSpace space {FilterSpace::nospace};
 	char * input{ nullptr };
 
-	bool parametre[3] = { false,false,false };
+	bool parametre[4] = { false,false,false,false };
 
 	for (int i = 1; i < argc;i++) {
 		std::string par = argv[i];
@@ -33,17 +34,25 @@ std::optional<std::tuple<Order, Filter, Case, char *>> options::parse(int argc, 
 			compare = Case::ignore;
 			parametre[2] = true;
 		}
+		else if (par == "-e" && parametre[3]==false) {
+			space = FilterSpace::whitespace;
+			parametre[3] = true;
+		}
 	}
 	
 	int c = 0;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 4; i++) {
 		if (parametre[i] == true) {
 			c++;
 		}
 	}
 
-	if (argc-1==4)
+	if (argc-1==5)
 	{
+		input = argv[argc - 1];
+		c++;
+	}
+	else if (argc-1==4 && c!=4) {
 		input = argv[argc - 1];
 		c++;
 	}
@@ -64,5 +73,5 @@ std::optional<std::tuple<Order, Filter, Case, char *>> options::parse(int argc, 
 		return {};
 	}
 
-	return std::make_tuple(order, filter, compare, input);
+	return std::make_tuple(order, filter, compare, space, input);
 }

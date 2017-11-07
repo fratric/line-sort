@@ -11,70 +11,70 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	SECTION("no options")
 	{
 		char * argv[] = { "line-sort" };
-		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, (char *) nullptr));
+		REQUIRE(options::parse(1, argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("no options and input") {
 		char * argv[] = { "line-sort" , "input" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, (char *) "input"));
 	}
 
 	SECTION("reversed")
 	{
 		char * argv[] = { "line-sort" , "-r"};
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) nullptr));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("reversed and input") {
 		char * argv[] = { "line-sort" , "-r" , "input" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, (char *) "input"));
 	}
 
 
 	SECTION("unique")
 	{
 		char * argv[] = { "line-sort" , "-u" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, (char *) nullptr));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("unique and input") {
 		char * argv[] = { "line-sort" , "-u" , "input" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, (char *) "input"));
 	}
 
 	SECTION("ignore case")
 	{
 		char * argv[] = { "line-sort" , "-i"};
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, (char *) nullptr));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("ignore case and input") {
 		char * argv[] = { "line-sort" , "-i" , "input" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, (char *) "input"));
 	}
 
 	SECTION("multiple 3")
 	{
 		char * argv[] = { "line-sort" , "-r" , "-i" , "-u" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, (char *) nullptr));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("multiple 3 and input")
 	{
 		char * argv[] = { "line-sort" , "-r" , "-i" , "-u" , "input" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, (char *) "input"));
 	}
 
 	SECTION("multiple 2")
 	{
 		char * argv[] = { "line-sort" , "-r" , "-u" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, (char *) nullptr));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, (char *) nullptr));
 	}
 
 	SECTION("multiple 2 and input")
 	{
 		char * argv[] = { "line-sort" , "-r" , "-u" , "input"};
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, (char *) "input"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, (char *) "input"));
 	}
 
 	SECTION("bad option and file")
@@ -98,7 +98,7 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	SECTION("1. patology case multiple -r")
 	{
 		char * argv[] = { "line-sort","-r","-r" };
-		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, (char *) "-r"));
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, (char *) "-r"));
 	}
 
 
@@ -112,6 +112,28 @@ TEST_CASE("Options")	//na zadanie testovat parsovaciu funkciu
 	{
 		char * argv[] = { "line-sort","-r","-r","input" };
 		REQUIRE_FALSE(options::parse(_countof(argv), argv).has_value());
+	}
+	SECTION("filter whitespace")
+	{
+		char * argv[] = { "line-sort" , "-e" };
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, (char *) nullptr));
+	}
+
+	SECTION("filter whitespace and input") {
+		char * argv[] = { "line-sort" , "-e" , "input" };
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, (char *) "input"));
+	}
+
+	SECTION("multiple 4")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-i" , "-u","-e" };
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, FilterSpace::whitespace, (char *) nullptr));
+	}
+
+	SECTION("multiple 4 and input")
+	{
+		char * argv[] = { "line-sort" , "-r" , "-i" , "-u" , "-e", "input" };
+		REQUIRE(options::parse(_countof(argv), argv) == std::make_tuple(Order::descending, Filter::unique, Case::ignore, FilterSpace::whitespace, (char *) "input"));
 	}
 }
 
