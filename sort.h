@@ -7,6 +7,6 @@
 
 namespace sort
 {
-	bool process(Order order, Filter filter, Case compare, std::istream & input, std::ostream & output);
+	bool process(Order order, Filter filter, Case compare, FilterSpace space, std::istream & input, std::ostream & output);
 }
 

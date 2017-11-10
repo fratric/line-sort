@@ -180,23 +180,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "1\n2\n3\n4\n5\n9\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "\n \nAa\nAz\nB\nD\nE\nFx\nG\naZ\nc\nf\n");
 	}
 
@@ -204,23 +204,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "1\n2\n3\n4\n5\n9\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "\n \nAa\nAz\nB\nD\nE\nFx\nG\naZ\nc\nf\n");
 	}
 
@@ -228,23 +228,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "1\n2\n3\n4\n5\n9\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::ignore, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "\n \nAa\naZ\nAz\nB\nc\nD\nE\nf\nFx\nG\n");
 	}
 
@@ -252,23 +252,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "1\n2\n3\n4\n5\n9\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::ascending, Filter::unique, Case::ignore, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "\n \nAa\nAz\nB\nc\nD\nE\nf\nFx\nG\n");
 	}
 
@@ -276,23 +276,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "9\n5\n4\n3\n2\n1\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::sensitive, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "f\nc\naZ\nG\nFx\nE\nD\nB\nAz\nAa\n \n\n");
 	}
 
@@ -300,23 +300,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "9\n5\n4\n3\n2\n1\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::all, Case::ignore, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\nAz\naZ\nAa\n \n\n");
 	}
 
@@ -324,23 +324,23 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "9\n5\n4\n3\n2\n1\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::sensitive, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "f\nc\naZ\nG\nFx\nE\nD\nB\nAz\nAa\n \n\n");
 	}
 
@@ -348,23 +348,49 @@ TEST_CASE("Sorting")
 	{
 		std::ostringstream output{};
 
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::empty(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, data::empty(), output) == true);
 		REQUIRE(output.str() == "");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::one_char(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, data::one_char(), output) == true);
 		REQUIRE(output.str() == " \n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::one_line(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, data::one_line(), output) == true);
 		REQUIRE(output.str() == "\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::numbered(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, data::numbered(), output) == true);
 		REQUIRE(output.str() == "9\n5\n4\n3\n2\n1\n");
 
 		output.str("");
-		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, data::mixed(), output) == true);
+		REQUIRE(sort::process(Order::descending, Filter::unique, Case::ignore, FilterSpace::nospace, data::mixed(), output) == true);
 		REQUIRE(output.str() == "G\nFx\nf\nE\nD\nc\nB\nAz\nAa\n \n\n");
 	}
+
+	SECTION("ascending - whitespace")
+	{
+		std::ostringstream output{};
+
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, data::empty(), output) == true);
+		REQUIRE(output.str() == "");
+
+		output.str("");
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, data::one_char(), output) == true);
+		REQUIRE(output.str() == "");
+
+		output.str("");
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, data::one_line(), output) == true);
+		REQUIRE(output.str() == "");
+
+		output.str("");
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, data::numbered(), output) == true);
+		REQUIRE(output.str() == "1\n2\n3\n4\n5\n9\n");
+
+		output.str("");
+		REQUIRE(sort::process(Order::ascending, Filter::all, Case::sensitive, FilterSpace::whitespace, data::mixed(), output) == true);
+		REQUIRE(output.str() == "Aa\nAz\nB\nD\nE\nFx\nG\naZ\nc\nf\n");
+	}
+
+
 }

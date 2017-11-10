@@ -55,42 +55,52 @@ void setSame(std::vector<std::string> & vekt) {
 	}
 }
 
-bool sort::process(Order order, Filter filter, Case compare, std::istream & input, std::ostream & output)
+void filterWhiteSpace(std::vector<std::string> & vekt) {
+	for (std::vector<std::string>::iterator i = vekt.begin(); i != vekt.end();) {
+		bool emp = true;
+		for (int j = 0; j < (*i).length(); j++) {
+			char c = (*i)[j];
+			if (!std::isspace(c)) {
+				emp = false;
+			}
+		}
+		if (emp) {
+			i=vekt.erase(i);
+		}
+		else {
+			++i;
+		}
+	}
+}
+
+bool sort::process(Order order, Filter filter, Case compare, FilterSpace space ,std::istream & input, std::ostream & output)
 {
 	std::vector<std::string> lines { std::istream_iterator<Line>(input), std::istream_iterator<Line>() };
-	
-
 	if (!lines.empty()) {
+		if (FilterSpace::whitespace == space) {
+			filterWhiteSpace(lines);
+		}
 		if (Case::ignore == compare && Filter::unique == filter) {
 			setSame(lines);
 		}
-
 		if (Filter::unique == filter) {
 			std::set<std::string> s(lines.begin(), lines.end());
 			lines.assign(s.begin(), s.end());
 		}
-
 		if (Case::ignore == compare) {
 			std::sort(lines.begin(), lines.end(),compareNoCase);
 		}
 		else{
 			std::sort(lines.begin(), lines.end());
 		}
-
-
 		if (Order::descending == order) {
 			std::reverse(lines.begin(),lines.end());
 		}
-	
-
 		for (auto i = lines.begin(); i != lines.end(); ++i) {
 			output << *i << std::endl;
-			
 		}	
-
 		//std::copy(lines.begin(), lines.end(), std::ostream_iterator<std::string>(output));
 	}
-
 	return true;
 }
 
